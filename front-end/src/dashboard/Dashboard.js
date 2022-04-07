@@ -1,11 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useHistory } from "react-router-dom";
+import {previous, next, today} from "../utils/date-time";
 import ErrorAlert from "../layout/ErrorAlert";
-import Reservation from "./Reservation"
-import Tables from "../tables/Tables"
-import { today, previous, next } from "../utils/date-time";
-import{ listReservations, listTables } from "../utils/api";
-import useQuery from "../utils/useQuery";
+import ReservationRow from "./ReservationRow"
+import TableRow from "./TableRow"
 
 /**
  * Defines the dashboard page.
@@ -13,54 +11,101 @@ import useQuery from "../utils/useQuery";
  *  the date for which the user wants to view reservations.
  * @returns {JSX.Element}
  */
-function Dashboard() {
-  const [reservations, setReservations] = useState([]);
-  const [reservationsError, setReservationsError] = useState(null);
-  const [tables, setTables] = useState([]);
-  const [tablesError, setTablesError] = useState(null);
-  const query = useQuery();
-  const date = query.get("date") ? query.get("date") : today();
-
+function Dashboard({date, resrvations, reservationsError, tables, tablesError, loadDashboard}) {
   const history = useHistory();
 
-  useEffect(loadDashboard, [date]);
+  const reservationsJSX = () => {
+    return reservations.map((reservation) => 
+      <ReservationRow key={reservation.reservation_id} reservation={reservation} loadDashboard={loadDashboard} />
+    )
+  }
 
-  function loadDashboard() {
-    const abortController = new AbortController();
-    setReservationsError(null);
-    listReservations({ date }, abortController.signal)
-      .then(setReservations)
-      .catch(setReservationsError);
-    listTables(abortController.signal)
-      .thn((pulledTables) => {
-        const updatedTables = pulledTables.map((table) => {
-          return {...table};
-        })
-        return updatedTables;
-      })
-      .then(setTables)
-      .catch(setTablesError);
-    return () => abortController.abort();
+  const tablesJSX = () => {
+    return tables.map((table) => 
+      <TableRow key={table.table_id} table={table} loadDashboard={loadDashboard} />
+    )
+  }
+
+  function handleClick({target}){
+    let newDate;
+    let useDate;
+
+    if(!date){
+      useDate = today();
+    } else {
+      useDate = date;
+    }
+
+    if(target.name === "previous"){
+      newDate = previous(useDate);
+    } else if (target.name === "next"){
+      newDate = next(useDate)
+    } else {
+      newDate = today();
+    }
+    history.push(`/dashboard?date=${newDate}`);
   }
 
   return (
     <main>
+      <h1>Dashbaord</h1>
       <div className="d-md-flex mb-3">
         <h4 className="mb-0">Reservations for date</h4>
       </div>
 
       <div>
-        <button className="btn btn-info m-1 p-3" onClick={()=> history.push(`/dashboard?date=${previous(date)}`)}>Previous Date</button>
-        <button className="btn btn-info m-1 p-3" onClick={()=> history.push(`dashboard?dates=${today()}`)}>Today</button>
-        <button className="btn btn-info m-1 p-3" onClick={()=> history.push(`/dashboard?date=${next(date)}`)}>Next Date</button>
+        <button className="btn btn-secondary m-1 p-3" type="button" name="previous" onClick={handleClick}>Previous Date</button>
+        <button className="btn btn-primary m-1 p-3" type="button" name="today" onClick={{handleClick}}>Today</button>
+        <button className="btn btn-secondary m-1 p-3" type="button" name="next" onClick={{handleClick}}>Next Date</button>
       </div>
 
       <ErrorAlert error={reservationsError} />
       
-      <div>
-        {reservations.map((res)=> <Reservation key={res.reservation_id} res={res} loadDashboard={loadDashboard} setReservationError={setReservationsError}/>)}
-      </div>
-      <Tables loadDashboard={loadDashboard} tables={tables} tablesError = {tablesError} />
+      <table className="table table-hover m-1">
+        <thead className="thead-light">
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">First Name</th>
+            <th scope="col">Last Name</th>
+            <th scope="col">Mobile Number</th>
+            <th scope="col">Date</th>
+            <th scope="col">Time</th>
+            <th scope="col">People</th>
+            <th scope="col">Status</th>
+            <th scope="col">Edit</th>
+            <th scope="col">Cancel</th>
+            <th scope="col">Seat</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          {reservationsJSX()}
+        </tbody>
+      </table>
+      
+      <br />
+      <br />
+
+      <h4 className="mb-0">Tables</h4>
+
+      <ErrorAlert error={tablesError} /> 
+
+      <table className="table table-hover m-1">
+        <thead className="thead-light">
+          <tr>
+            <th scope="col">Table ID</th>
+            <th scope="col">Table Name</th>
+            <th scope="col">Capacity</th>
+            <th scope="col">Status</th>
+            <th scope="col">Reservation ID</th>
+            <th scope="col">Finish</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          {tablesJSX()}
+        </tbody>
+      </table>
     </main>
   );
 }
