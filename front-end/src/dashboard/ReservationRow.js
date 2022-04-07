@@ -49,3 +49,5 @@ function ReservationRow({reservation, loadDashbaord}){
         </tr>
     )
 }
+
+export default ReservationRow;
