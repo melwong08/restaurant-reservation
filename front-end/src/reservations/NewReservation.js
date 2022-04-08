@@ -1,10 +1,16 @@
-import React, {useState} from "react";
-import {useHistory} from "react-router-dom";
+import React, {useEffect, useState} from "react";
+import {useHistory, useParams} from "react-router-dom";
 import ErrorAlert from "../layout/ErrorAlert";
-import {postReservation} from "../utils/api";
+import {createReservation, editReservation, listReservations} from "../utils/api";
 
-export default function NewReservation ({date}){
+function NewReservation ({loadDashboard, edit}){
     const history = useHistory();
+    const {reservation_id} = useParams();
+
+    const [reservationsError, setReservationsError] = useState(null);
+    const [errors, setErrors] = useState([]);
+    const [apiError, setApiError] = useState(null);
+
     const initalFormState = {
         first_name: "",
         last_name: "",
@@ -13,9 +19,41 @@ export default function NewReservation ({date}){
         reservation_time: "12:00",
         people: 1
     }
-
     const [formData, setFormData] = useState(initialFormState);
-    const [reservationsError, setReservationsError] = useState(null);
+    
+    useEffect(() => {
+        if(edit){
+            if(!reservation_id) return null;
+
+            loadReservations()
+            .then((response) => response.find(reservation) => reservation.reservation_id === Number(reservation_id))
+            .then(fillFields);
+        }
+
+        function fillFields(foundReservation) {
+			if(!foundReservation || foundReservation.status !== "booked") {
+				return <p>Only booked reservations can be edited.</p>;
+			}
+
+			const date = new Date(foundReservation.reservation_date);
+			const dateString = `${date.getFullYear()}-${('0' + (date.getMonth() + 1)).slice(-2)}-${('0' + (date.getDate())).slice(-2)}`;
+	
+			setFormData({
+				first_name: foundReservation.first_name,
+				last_name: foundReservation.last_name,
+				mobile_number: foundReservation.mobile_number,
+				reservation_date: dateString,
+				reservation_time: foundReservation.reservation_time,
+				people: foundReservation.people,
+			});
+		}
+
+        async function loadReservations(){
+            const abortController = new AbortController();
+            return await listReservations(null, abortController.signal)
+            .catch(setReservationsError)
+        }
+    }, [edit, reservation_id]);
 
     const handleChange = ({target}) => {
         let value = target.value;
@@ -107,3 +145,5 @@ export default function NewReservation ({date}){
         </div>
     )
 }
+
+export default NewReservation;
