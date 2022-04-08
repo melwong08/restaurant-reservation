@@ -1,15 +1,15 @@
-import React from "react";
-
+import React, {useState, useEffect} from "react";
+import { listReservations, listTables } from "../utils/api";
 import { Redirect, Route, Switch } from "react-router-dom";
-import Dashboard from "../reservations/Dashboard";
+import Dashboard from "../dashboard/Dashboard";
 import NewReservation from "../reservations/NewReservation";
-import EditReservation from "../reservations/EditReservation";
-import NewTable from "../tables/NewTable"
-import Seating from "../seating/Seating"
-import Search from "../search/Search"
 import NotFound from "./NotFound";
+import useQuery from "../utils/useQuery";
+import NewTable from "../tables/NewTable"
+import SeatReservation from "../reservations/SeatReservation"
+import Search from "../search/Search"
 import { today } from "../utils/date-time";
-//import useQuery from "../utils/useQuery";
+
 /**
  * Defines all the routes for the application.
  *
@@ -18,6 +18,34 @@ import { today } from "../utils/date-time";
  * @returns {JSX.Element}
  */
 function Routes() {
+  const [reservations, setReservations] = useState([]);
+  const [reservationsError, setReservationsError] = useState(null);
+
+	const [tables, setTables] = useState([]);
+	const [tablesError, setTablesError] = useState(null);
+
+	const query = useQuery();
+	const date = query.get("date") ? query.get("date") : today();
+
+	useEffect(loadDashboard, [date]);
+
+	function loadDashboard() {
+    	const abortController = new AbortController();
+
+    	setReservationsError(null);
+		setTablesError(null);
+
+    	listReservations({ date: date }, abortController.signal)
+      		.then(setReservations)
+      		.catch(setReservationsError);
+
+		listTables(abortController.signal)
+			.then((tables) => tables.sort((tableA, tableB) => tableA.table_id - tableB.table_id))
+			.then(setTables)
+			.catch(setTablesError);
+
+    	return () => abortController.abort();
+  	}
   
   return (
     <Switch>
