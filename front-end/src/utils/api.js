@@ -102,6 +102,13 @@ export async function readReservation(reservation_id, signal) {
   const url = `${API_BASE_URL}/reservations/${reservation_id}`;
   return await fetchJson(url, { headers, signal }, []);
 }
+
+export async function createReservation(reservation, signal) {
+  const url = `${API_BASE_URL}/reservations`;
+  const body = JSON.stringify({ data: reservation });
+  return await fetchJson(url, { headers, signal, method: "POST", body }, []);
+}
+
 export async function editReservation(reservation, reservation_id, signal) {
   const url = `${API_BASE_URL}/reservations/${reservation_id}`;
   return await fetchJson(url,{method: "PUT", headers, body: JSON.stringify({ data: reservation }),signal},
