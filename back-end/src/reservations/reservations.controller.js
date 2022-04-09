@@ -6,7 +6,6 @@ async function list(req, res) {
 	const mobile_number = req.query.mobile_number;
 
 	const reservations = await service.list(date, mobile_number);
-
 	const response = reservations.filter((reservation) => reservation.status !== "finished");
 
 	res.json({ data: response });
