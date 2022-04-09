@@ -5,11 +5,11 @@ function TableRow({table, loadDashboard}){
     if(!table) return null;
 
     function handleFinish(){
-        if(wondow.confirm("Is this table ready to seat new guests? This cannot be undone.")) {
+        if(window.confirm("Is this table ready to seat new guests? This cannot be undone.")) {
             const abortController = new AbortController();
 
             finishTable(table.table_id, abortController.signal)
-                .then(loadDashbaord);
+                .then(loadDashboard);
 
             return () => abortController.abort()
         }

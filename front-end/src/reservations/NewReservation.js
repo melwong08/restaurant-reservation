@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import ErrorAlert from "../layout/ErrorAlert";
-import { createReservation, editReservation, listReservations } from "../utils/api";
+import { postReservation, editReservation, listReservations } from "../utils/api";
 
 function NewReservation({ loadDashboard, edit }) {
     const history = useHistory();
@@ -10,16 +10,15 @@ function NewReservation({ loadDashboard, edit }) {
     const [reservationsError, setReservationsError] = useState(null);
     const [errors, setErrors] = useState([]);
     const [apiError, setApiError] = useState(null);
-
-    const initalFormState = {
-        first_name: "",
-        last_name: "",
-        mobile_number: "",
-        reservation_date: date,
-        reservation_time: "12:00",
-        people: 1
-    }
-    const [formData, setFormData] = useState(initialFormState);
+    const [formData, setFormData] = useState({
+		// initial (default) data
+		first_name: "",
+		last_name: "",
+		mobile_number: "",
+		reservation_date: "",
+		reservation_time: "",
+		people: "",
+	});
 
     useEffect(() => {
         if (edit) {
@@ -84,7 +83,7 @@ function NewReservation({ loadDashboard, edit }) {
                     .catch(setApiError);
             }
             else {
-                createReservation(formData, abortController.signal)
+                postReservation(formData, abortController.signal)
                     .then(loadDashboard)
                     .then(() => history.push(`/dashboard?date=${formData.reservation_date}`))
                     .catch(setApiError);

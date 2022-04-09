@@ -11,7 +11,7 @@ import TableRow from "./TableRow"
  *  the date for which the user wants to view reservations.
  * @returns {JSX.Element}
  */
-function Dashboard({date, resrvations, reservationsError, tables, tablesError, loadDashboard}) {
+function Dashboard({date, reservations, reservationsError, tables, tablesError, loadDashboard}) {
   const history = useHistory();
 
   const reservationsJSX = () => {

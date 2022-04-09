@@ -22,7 +22,7 @@ function NewTable({ loadDashboard }) {
         const abortController = new AbortController();
 
         if (validateFields()) {
-            createTable(formData, abortController.signal)
+            postTable(formData, abortController.signal)
                 .then(loadDashboard)
                 .then(() => history.push(`/dashboard`))
                 .catch(setError);

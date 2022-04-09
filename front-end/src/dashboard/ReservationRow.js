@@ -2,7 +2,7 @@ import React from "react";
 import {Link} from "react-router-dom";
 import {updateReservationStatus} from "../utils/api";
 
-function ReservationRow({reservation, loadDashbaord}){
+function ReservationRow({reservation, loadDashboard}){
     if(!reservation || reservation.status === "finished") return null;
 
     function handleCancel(){
