@@ -55,8 +55,8 @@ function Dashboard({date, reservations, reservationsError, tables, tablesError, 
 
       <div>
         <button className="btn btn-secondary m-1 p-3" type="button" name="previous" onClick={handleClick}>Previous Date</button>
-        <button className="btn btn-primary m-1 p-3" type="button" name="today" onClick={{handleClick}}>Today</button>
-        <button className="btn btn-secondary m-1 p-3" type="button" name="next" onClick={{handleClick}}>Next Date</button>
+        <button className="btn btn-primary m-1 p-3" type="button" name="today" onClick={handleClick}>Today</button>
+        <button className="btn btn-secondary m-1 p-3" type="button" name="next" onClick={handleClick}>Next Date</button>
       </div>
 
       <ErrorAlert error={reservationsError} />
