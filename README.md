@@ -5,11 +5,19 @@
 
 ## API Documentation 
 ## Screenshots
-## Summary to explain the application
+## Summary
+
+Welcome to the Period Table restaurant reservation application! Fine dinning becomes easy to manage with our reservation system where...
+
 ## Technology Used
 
 - JavaScript
 - React.js
 - HTML
 
-## Installation Instructions
+## Installation
+
+1. Fork and clone this repository.
+2. Run npm install to install project dependencies.
+3. Run npm run start to start your server.
+If you have trouble getting the server to run, reach out for assistance.
