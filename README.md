@@ -7,4 +7,9 @@
 ## Screenshots
 ## Summary to explain the application
 ## Technology Used
+
+- JavaScript
+- React.js
+- HTML
+
 ## Installation Instructions
