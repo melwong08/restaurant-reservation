@@ -1,7 +1,7 @@
 # Periodic Table Restaurant Reservations
 
 ## Link to live app
-[Live app](https://melwong08.github.io/restaurant-reservation/)
+[Live app](https://mel-restaurant-reservation.herokuapp.com/)
 
 ## API Documentation 
 ## Screenshots
