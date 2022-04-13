@@ -6,16 +6,21 @@
 ## API Documentation 
 
 /dashboard
-GET: 
+GET: displays previous and upcoming reservations and tables
 
 /search
-GET: 
+GET: retrieves previously created reservations
 
 /reservations/new
-POST:
+GET: retrieves reservations
+PUT: updates reservations
+POST: creates reservations
 
 /tables/new
-POST:
+GET: retrieves tables
+PUT: updates tables
+POST: creates new table 
+DELETE: deletes table
 
 ## Screenshots
 ### Dashboard
