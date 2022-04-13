@@ -4,6 +4,19 @@
 [https://mel-restaurant-client.herokuapp.com](https://mel-restaurant-client.herokuapp.com/dashboard)
 
 ## API Documentation 
+
+/dashboard
+GET: 
+
+/search
+GET: 
+
+/reservations/new
+POST:
+
+/tables/new
+POST:
+
 ## Screenshots
 ### Dashboard
 ![Dashboard](https://github.com/melwong08/restaurant-reservation/blob/main/images/dashboard.png)
