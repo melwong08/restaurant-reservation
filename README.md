@@ -22,7 +22,7 @@
 
 - PUT: updates tables
 - POST: creates new table 
-- DELETE: deletes table
+- DELETE: finishes table
 
 ## Screenshots
 ### Dashboard
