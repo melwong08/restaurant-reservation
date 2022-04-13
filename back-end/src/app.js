@@ -14,6 +14,7 @@ const app = express();
 
 app.use(cors());
 app.use(express.json());
+console.log("new app!")
 
 app.use("/reservations", reservationsRouter);
 app.use("/tables", tablesRouter);
