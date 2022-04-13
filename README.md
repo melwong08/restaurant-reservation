@@ -5,13 +5,13 @@
 
 ## API Documentation 
 ## Screenshots
-
+### Dashboard
 ![Dashboard](https://github.com/melwong08/restaurant-reservation/blob/main/images/dashboard.png)
-
+### Search
 ![Search](https://github.com/melwong08/restaurant-reservation/blob/main/images/search.png)
-
+### New Reservation
 ![New Reservation](https://github.com/melwong08/restaurant-reservation/blob/main/images/new-reservation.png)
-
+### New Table
 ![New Table](https://github.com/melwong08/restaurant-reservation/blob/main/images/new-table.png)
 
 ## Summary
