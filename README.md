@@ -6,7 +6,7 @@
 ## API Documentation 
 ## Screenshots
 
-![Dashboard](./images/dashboard)
+![Dashboard](https://github.com/melwong08/restaurant-reservation/blob/main/images/dashboard.png)
 
 ## Summary
 
