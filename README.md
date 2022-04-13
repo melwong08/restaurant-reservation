@@ -5,21 +5,21 @@
 
 ## API Documentation 
 
-/dashboard
+#### /dashboard
 
 GET: displays previous and upcoming reservations and tables
 
-/search
+#### /search
 
 GET: retrieves previously created reservations
 
-/reservations/new
+#### /reservations/new
 
 GET: retrieves reservations
 PUT: updates reservations
 POST: creates reservations
 
-/tables/new
+#### /tables/new
 
 GET: retrieves tables
 PUT: updates tables
