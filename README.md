@@ -7,19 +7,17 @@
 
 #### /dashboard
 
-GET: displays previous and upcoming reservations and tables
+- GET: displays previous and upcoming reservations and tables
 
 #### /search
 
-GET: retrieves previously created reservations
+- GET: retrieves previously created reservations
 
 #### /reservations/new
 
-GET: retrieves reservations
-
-PUT: updates reservations
-
-POST: creates reservations
+- GET: retrieves reservations
+- PUT: updates reservations
+- POST: creates reservations
 
 #### /tables/new
 
