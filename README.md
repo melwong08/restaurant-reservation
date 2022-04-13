@@ -15,13 +15,11 @@
 
 #### /reservations/new
 
-- GET: retrieves reservations
 - PUT: updates reservations
 - POST: creates reservations
 
 #### /tables/new
 
-- GET: retrieves tables
 - PUT: updates tables
 - POST: creates new table 
 - DELETE: deletes table
