@@ -6,7 +6,7 @@
 ## API Documentation 
 ## Screenshots
 
-![Dashboard](../images/dashboard)
+![Dashboard](./images/dashboard)
 
 ## Summary
 
