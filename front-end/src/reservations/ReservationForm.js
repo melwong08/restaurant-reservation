@@ -3,7 +3,7 @@ import { useHistory, useParams } from "react-router-dom";
 import ErrorAlert from "../layout/ErrorAlert";
 import { postReservation, editReservation, listReservations } from "../utils/api";
 
-function NewReservation({ loadDashboard, edit }) {
+function ReservationForm({ loadDashboard, edit }) {
     const history = useHistory();
     const { reservation_id } = useParams();
 
@@ -20,39 +20,39 @@ function NewReservation({ loadDashboard, edit }) {
 		people: "",
 	});
 
-    useEffect(() => {
-        if (edit) {
-            if (!reservation_id) return null;
+    // useEffect(() => {
+    //     if (edit) {
+    //         if (!reservation_id) return null;
 
-            loadReservations()
-                .then((response) => response.find((reservation) => reservation.reservation_id === Number(reservation_id)))
-                .then(fillFields)
-        }
+    //         loadReservations()
+    //             .then((response) => response.find((reservation) => reservation.reservation_id === Number(reservation_id)))
+    //             .then(fillFields)
+    //     }
 
-        function fillFields(foundReservation) {
-            if (!foundReservation || foundReservation.status !== "booked") {
-                return <p>Only booked reservations can be edited.</p>;
-            }
+    //     function fillFields(foundReservation) {
+    //         if (!foundReservation || foundReservation.status !== "booked") {
+    //             return <p>Only booked reservations can be edited.</p>;
+    //         }
 
-            const date = new Date(foundReservation.reservation_date);
-            const dateString = `${date.getFullYear()}-${('0' + (date.getMonth() + 1)).slice(-2)}-${('0' + (date.getDate())).slice(-2)}`;
+    //         const date = new Date(foundReservation.reservation_date);
+    //         const dateString = `${date.getFullYear()}-${('0' + (date.getMonth() + 1)).slice(-2)}-${('0' + (date.getDate())).slice(-2)}`;
 
-            setFormData({
-                first_name: foundReservation.first_name,
-                last_name: foundReservation.last_name,
-                mobile_number: foundReservation.mobile_number,
-                reservation_date: dateString,
-                reservation_time: foundReservation.reservation_time,
-                people: foundReservation.people,
-            });
-        }
+    //         setFormData({
+    //             first_name: foundReservation.first_name,
+    //             last_name: foundReservation.last_name,
+    //             mobile_number: foundReservation.mobile_number,
+    //             reservation_date: dateString,
+    //             reservation_time: foundReservation.reservation_time,
+    //             people: foundReservation.people,
+    //         });
+    //     }
 
-        async function loadReservations() {
-            const abortController = new AbortController();
-            return await listReservations(null, abortController.signal)
-                .catch(setReservationsError)
-        }
-    }, [edit, reservation_id]);
+    //     async function loadReservations() {
+    //         const abortController = new AbortController();
+    //         return await listReservations(null, abortController.signal)
+    //             .catch(setReservationsError)
+    //     }
+    // }, [edit, reservation_id]);
 
     const handleChange = ({ target }) => {
         let value = target.value;
@@ -213,4 +213,4 @@ function NewReservation({ loadDashboard, edit }) {
     );
 }
 
-export default NewReservation;
+export default ReservationForm;
