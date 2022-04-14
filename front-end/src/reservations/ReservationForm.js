@@ -78,7 +78,6 @@ function ReservationForm({ formData, handleChange, handleSubmit }) {
                 <button className="btn btn-primary m-1" type="submit" onClick={handleSubmit}>Submit</button>
                 <button className="btn btn-danger m-1" type="cancel" onClick={history.goBack}>Cancel</button>
             </form>
-            );
         </>
     )
         
