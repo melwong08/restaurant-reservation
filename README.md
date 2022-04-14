@@ -86,7 +86,7 @@ On the search page, users can find reservations by searching customer's mobile p
 
 ### New Reservation
 
-On the new reservation page, users will be able to input reservations for upcoming dates. The customer's name, mobile number, reservation date and time, and party size are required to place the reservation. 
+On the new reservation page, users will be able to input reservations for upcoming dates. The customer's name, mobile number, reservation date and time, and party size are required to place the reservation. The restaurant is closed on Tuesdays, so reservations cannot be placed on that day.
 ![New Reservation](https://github.com/melwong08/restaurant-reservation/blob/main/images/new-reservation.png)
 
 ### New Table
