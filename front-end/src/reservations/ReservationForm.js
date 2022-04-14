@@ -80,6 +80,7 @@ function ReservationForm({ formData, handleChange, handleSubmit }) {
             </form>
             );
         </>
+    )
         
 }
 
