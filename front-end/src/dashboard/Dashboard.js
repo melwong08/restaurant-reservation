@@ -48,7 +48,7 @@ function Dashboard({date, reservations, reservationsError, tables, tablesError, 
 
   return (
     <main>
-      <h1>Dashbaord</h1>
+      <h1>Dashboard</h1>
       <div className="d-md-flex mb-3">
         <h4 className="mb-0">Reservations for date</h4>
       </div>
