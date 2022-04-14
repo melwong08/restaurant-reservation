@@ -1,37 +1,97 @@
 # Periodic Table Restaurant Reservations
 
-## Link to live app
+## Website URL
 [https://mel-restaurant-client.herokuapp.com](https://mel-restaurant-client.herokuapp.com/dashboard)
 
 ## API Documentation 
 
-#### /dashboard
+### Reservations
+GET `/reservations`
+- Retrieves all current reservations
 
-- GET: displays previous and upcoming reservations and tables
+----
 
-#### /search
+GET `/reservations/:reservation_id`
+- Retrieves the reservation with the corresponding reservation id 
 
-- GET: retrieves previously created reservations
+GET `/reservations/:reservation_id/status`
+- Retrieves the desired reservation's status. May return *seated*, *finished*, or *canceled*.
 
-#### /reservations/new
+PUT `/reservations/:reservation_id`
+- Updates an existing reservation
 
-- PUT: updates reservations
-- POST: creates reservations
+#### Parameters:
+| Parameter | Type |
+| --------- | ---- |
+| `reservation_id`| `int` |
 
-#### /tables/new
+----
 
-- PUT: updates tables
-- POST: creates new table 
-- DELETE: finishes table
+POST `/reservations`
+- Creates a new reservation
 
-## Screenshots
+#### Parameters:
+| Parameter | Type |
+| --------- | ---- |
+| `first_name`| `str` |
+| `last_name`| `str` |
+| `mobile_number`| `tel` |
+| `reservation_date`| `date` |
+| `reservation_time`| `time` |
+| `people`| `int` |
+
+----
+
+### Tables
+GET `/tables`
+- Retrieves all tables
+
+----
+
+PUT `/tables/:table_id/seat`
+- Updates table status to connected to a reservation 
+
+DELETE `/tables/:table_id/seat`
+- Updates the status of the reservation to *finished* at the table and clears the reservation_id
+- Does not delete the table, returns the status of the table to *free*
+
+#### Parameters:
+| Parameter | Type |
+| --------- | ---- |
+| `reservation_id`| `int` |
+
+----
+
+POST `/tables`
+- Creates a new table
+
+#### Parameters:
+| Parameter | Type |
+| --------- | ---- |
+| `table_name`| `str` |
+| `capacity`| `int` |
+
+----
+
+## Features
 ### Dashboard
+
+The dashboard is the home page of the website. From here, users will be able to view previous, current, and next day reservations as well as tables.
 ![Dashboard](https://github.com/melwong08/restaurant-reservation/blob/main/images/dashboard.png)
+
 ### Search
+
+On the search page, users can find reservations by searching customer's mobile phone numbers. 
 ![Search](https://github.com/melwong08/restaurant-reservation/blob/main/images/search.png)
+
 ### New Reservation
+
+On the new reservation page, users will be able to input reservations for upcoming dates. The customer's name, mobile number, reservation date and time, and party size are required to place the reservation. 
 ![New Reservation](https://github.com/melwong08/restaurant-reservation/blob/main/images/new-reservation.png)
+
 ### New Table
+
+On the new table page, users can create a table where customers can be seated.
 ![New Table](https://github.com/melwong08/restaurant-reservation/blob/main/images/new-table.png)
 
 ## Summary
